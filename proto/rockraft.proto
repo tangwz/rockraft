@@ -1,0 +1,24 @@
+syntax="proto2";
+package rockraft;
+option cc_generic_services = true;
+
+message PutRequest {
+    required string key = 1;
+    required string value = 2;
+};
+
+message GetRequest {
+    required string key = 1;
+}
+
+message RockRaftResponse {
+    required bool success = 1;
+    optional string value = 2;
+    optional string redirect = 3;
+}
+
+// service
+service RockRaftService {
+    rpc put(PutRequest) returns (RockRaftResponse);
+    rpc get(GetRequest) returns (RockRaftResponse);
+}
